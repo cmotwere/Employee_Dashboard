@@ -1,9 +1,3 @@
-Absolutely, Charles — here’s a polished, consulting-ready `README.md` tailored for your Django Employee Performance Dashboard. It highlights your technical skills, business relevance, and academic professionalism.
-
----
-
-## 📘 `README.md` for GitHub
-
 ```markdown
 # Django Employee Performance Dashboard
 
@@ -73,10 +67,10 @@ Built as part of a portfolio initiative to demonstrate real-world business analy
 
 7. **Access the dashboard**
    - Admin panel: `http://127.0.0.1:8000/admin`
-   - Dashboard view: `http://127.0.0.1:8000/`
+   - Dashboard view: `http://127.0.0.1:8000/?department=`
+   - 
 
 ## 📊 Sample Data Format
-
 You can manually enter data via the admin panel or upload a CSV (coming soon). Sample fields:
 
 ```csv
@@ -86,13 +80,11 @@ Kwame Owusu,Finance,92,2025-10-03
 ```
 
 ## 📸 Screenshots
-
 > _Add screenshots of your dashboard and charts here for visual impact._
 >![alt text]({E982389A-220B-494F-8549-FB0C25C146FE}.png)
 > 
 
 ## 📚 Author
-
 **Charles Motwore**  
 Master’s Student in Computer Information Systems & Business Analytics  
 Focused on portfolio-building, consulting-grade deliverables, and ethical data science.
@@ -100,7 +92,6 @@ Focused on portfolio-building, consulting-grade deliverables, and ethical data s
 ---
 
 ## 💡 Future Enhancements
-
 - CSV upload for bulk data entry
 - Export charts as images or PDFs
 - Deployment to Render or Heroku
@@ -109,11 +100,6 @@ Focused on portfolio-building, consulting-grade deliverables, and ethical data s
 ---
 
 ## 📝 License
-
 This project is for academic and portfolio use. Feel free to fork and adapt with attribution.
 
 ```
-
----
-
-Let me know if you'd like help adding screenshots or customizing the tone for your lecturer. You’re presenting this like a pro!
