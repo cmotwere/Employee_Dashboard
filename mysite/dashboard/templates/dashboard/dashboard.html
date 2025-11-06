@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Employee Dashboard</h1>
+    
+    <!-- Debug info -->
+    <p>Total employees: {{ employees|length }}</p>
+    <p>Departments: {{ departments|join:", " }}</p>
+    
+    <!-- Department filter -->
+    <form method="GET">
+        <label for="department">Filter by Department:</label>
+        <select name="department" id="department">
+            <option value="">All Departments</option>
+            {% for dept in departments %}
+                <option value="{{ dept }}" {% if dept == selected_department %}selected{% endif %}>{{ dept }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Charts -->
+    <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+        <div>
+            <h2>Employee Performance</h2>
+            <canvas id="performanceChart" width="400" height="400"></canvas>
+        </div>
+        
+        <div>
+            <h2>Department Distribution</h2>
+            <canvas id="deptChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // Performance Bar Chart
+            const ctxBar = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: [{% for emp in employees %}'{{ emp.name }}',{% endfor %}],
+                    datasets: [{
+                        label: 'Performance Score',
+                        data: [{% for emp in employees %}{{ emp.performance_score }},{% endfor %}],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    }
+                }
+            });
+
+            // Department Pie Chart
+            const ctxPie = document.getElementById('deptChart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: [{% for dept, count in dept_counts.items %}'{{ dept }}',{% endfor %}],
+                    datasets: [{
+                        label: 'Employees per Department',
+                        data: [{% for dept, count in dept_counts.items %}{{ count }},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ]
+                    }]
+                }
+            });
+        };
+    </script>
+</body>
+</html>
