@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from collections import Counter
 from .models import Employee
 
+@login_required
 def dashboard_view(request):
     department = request.GET.get('department')
     if department:

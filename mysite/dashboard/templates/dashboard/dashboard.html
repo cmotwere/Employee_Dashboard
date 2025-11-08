@@ -5,6 +5,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Add navigation -->
+    <div style="background: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+        <a href="{% url 'dashboard' %}">Analytics Dashboard</a> | 
+        <a href="{% url 'user_management:employee_dashboard' %}">User Management</a> | 
+        {% if user.is_authenticated %}
+            <span style="float: right;">
+                Welcome, {{ user.username }}! 
+                <a href="{% url 'user_management:logout' %}">Logout</a>
+            </span>
+        {% else %}
+            <span style="float: right;">
+                <a href="{% url 'user_management:login' %}">Login</a>
+            </span>
+        {% endif %}
+    </div>
+
     <h1>Employee Dashboard</h1>
     
     <!-- Debug info -->
@@ -34,6 +50,31 @@
             <h2>Department Distribution</h2>
             <canvas id="deptChart" width="400" height="400"></canvas>
         </div>
+    </div>
+
+    <!-- Employee List -->
+    <div style="margin: 20px 0;">
+        <h2>Employee Details</h2>
+        <table border="1" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Performance Score</th>
+                    <th>Review Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.department }}</td>
+                    <td>{{ emp.performance_score }}</td>
+                    <td>{{ emp.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <script>

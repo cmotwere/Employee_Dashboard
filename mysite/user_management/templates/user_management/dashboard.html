@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+</head>
+<body>
+    <h1>Employee Dashboard</h1>
+    
+    <div style="float: right;">
+        <p>Welcome, {{ current_employee.name }}!</p>
+        <a href="{% url 'user_management:logout' %}">Logout</a>
+    </div>
+    
+    <h2>Employee List</h2>
+    
+    {% if is_hr %}
+        <p><strong>HR Access</strong> - You can view and edit all employees</p>
+    {% else %}
+        <p><strong>Employee Access</strong> - You can only edit your performance score</p>
+    {% endif %}
+    
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Performance Score</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.performance_score }}</td>
+                <td>{{ employee.get_role_display }}</td>
+                <td>
+                    <a href="{% url 'user_management:edit_employee' employee.id %}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
